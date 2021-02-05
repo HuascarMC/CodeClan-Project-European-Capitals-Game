@@ -1,5 +1,9 @@
 const GoogleMapsLoader = require("google-maps");
 
+if (process.env.API_KEY) {
+  GoogleMapsLoader.KEY = process.env.API_KEY;
+}
+
 const MapWrapper = function (container, coordinates, zoom, callback) {
   GoogleMapsLoader.load(
     function (google) {

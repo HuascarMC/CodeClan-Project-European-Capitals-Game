@@ -22,13 +22,24 @@ MongoClient.connect(MONGO_URL, function (err, client) {
   }
 
   const db = client.db("european-capitals-game");
+  db.collection("countries")
+    .find()
+    .toArray((err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-  // db.createCollection("countries");
-  // db.collection("countries").insert(countries, (err, res) => {
-  //   if (err) {
-  //     return;
-  //   }
-  // });
+      if (result.length < 1) {
+        db.createCollection("countries");
+        db.collection("countries").insert(countries, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+        });
+      }
+    });
 
   app.get("/api/countries", function (req, res) {
     db.collection("countries")
