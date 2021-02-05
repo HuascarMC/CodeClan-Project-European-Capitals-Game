@@ -1,32 +1,39 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const MongoClient = require("mongodb").MongoClient;
+const countries = require("./countries.json");
 
 const PORT = 5000;
-const MONGO_URL = 'mongodb://localhost:27017/';
+const MONGO_URL = "mongodb://localhost:27017/";
 
 const app = express();
 
-app.use(cors('*'));
+app.use(cors("*"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(express.static('./build'));
+app.use(express.static("./build"));
 
-MongoClient.connect(MONGO_URL, function(err, client) {
+MongoClient.connect(MONGO_URL, function (err, client) {
   if (err) {
     console.log(err);
     return;
   }
 
-  const db = client.db('european-capitals-game');
+  const db = client.db("european-capitals-game");
 
-  app.get('/api/countries', function(req, res) {
-    db
-      .collection('countries')
+  // db.createCollection("countries");
+  // db.collection("countries").insert(countries, (err, res) => {
+  //   if (err) {
+  //     return;
+  //   }
+  // });
+
+  app.get("/api/countries", function (req, res) {
+    db.collection("countries")
       .find()
-      .toArray(function(err, result) {
+      .toArray(function (err, result) {
         if (err) {
           console.log(err);
           res.status(500);
@@ -37,11 +44,10 @@ MongoClient.connect(MONGO_URL, function(err, client) {
       });
   });
 
-  app.get('/api/countries/random', function(req, res) {
-    db
-      .collection('countries')
+  app.get("/api/countries/random", function (req, res) {
+    db.collection("countries")
       .find({})
-      .toArray(function(err, result) {
+      .toArray(function (err, result) {
         if (err) {
           console.log(err);
           res.status(500);
@@ -55,8 +61,8 @@ MongoClient.connect(MONGO_URL, function(err, client) {
       });
   });
 
-  app.post('/api/scores', function(req, res) {
-    db.collection('scores').insert(req.body, function(err, result) {
+  app.post("/api/scores", function (req, res) {
+    db.collection("scores").insert(req.body, function (err, result) {
       if (err) {
         console.log(err);
         res.status(500);
@@ -69,12 +75,11 @@ MongoClient.connect(MONGO_URL, function(err, client) {
     });
   });
 
-  app.get('/api/scores', function(req, res) {
-    db
-      .collection('scores')
+  app.get("/api/scores", function (req, res) {
+    db.collection("scores")
       .find({})
-      .sort({score: -1})
-      .toArray(function(err, result) {
+      .sort({ score: -1 })
+      .toArray(function (err, result) {
         if (err) {
           console.log(err);
           res.status(500);
@@ -86,24 +91,24 @@ MongoClient.connect(MONGO_URL, function(err, client) {
       });
   });
 
-  app.delete('/api/scores', function(req, res) {
-  db.collection('scores').remove({}, function(err, result) {
-    if (err) {
-      console.log(err);
-      res.status(500);
+  app.delete("/api/scores", function (req, res) {
+    db.collection("scores").remove({}, function (err, result) {
+      if (err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+
+      res.status(204);
       res.send();
-      return;
-    }
-
-    res.status(204);
-    res.send();
+    });
   });
-});
 
-  console.log('Connected to DB');
-  console.log('Starting server...');
+  console.log("Connected to DB");
+  console.log("Starting server...");
 
-  app.listen(PORT, function() {
+  app.listen(PORT, function () {
     console.log(`Server started on ${PORT}`);
   });
 });
