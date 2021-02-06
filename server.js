@@ -3,25 +3,23 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const countries = require("./countries.json");
+require("dotenv").config();
 
+const MONGO_URL = process.env.MONGO_DB_URI || "mongodb://localhost:27017/";
 const PORT = 5000;
-const MONGO_URL = "mongodb://localhost:27017/";
-
 const app = express();
-
 app.use(cors("*"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static("./build"));
 
-MongoClient.connect(MONGO_URL, function (err, client) {
+MongoClient.connect(MONGO_URL, (err, client) => {
   if (err) {
     console.log(err);
     return;
   }
-
-  const db = client.db("european-capitals-game");
+  const db = client.db("european-capitals-db");
   db.collection("countries")
     .find()
     .toArray((err, result) => {
@@ -32,6 +30,7 @@ MongoClient.connect(MONGO_URL, function (err, client) {
 
       if (result.length < 1) {
         db.createCollection("countries");
+        db.createCollection("scores");
         db.collection("countries").insert(countries, (err, res) => {
           if (err) {
             console.log(err);
