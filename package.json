@@ -30,6 +30,6 @@
     "forecast": "^0.3.2",
     "geojson-tools": "^0.2.2",
     "google-maps": "^3.2.1",
-    "mongodb": "^3.0.1"
+    "mongodb": "^3.6.4"
   }
 }

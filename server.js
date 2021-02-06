@@ -20,25 +20,28 @@ MongoClient.connect(MONGO_URL, (err, client) => {
     return;
   }
   const db = client.db("european-capitals-db");
-  db.collection("countries")
-    .find()
-    .toArray((err, result) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
 
-      if (result.length < 1) {
-        db.createCollection("countries");
-        db.createCollection("scores");
-        db.collection("countries").insert(countries, (err, res) => {
-          if (err) {
-            console.log(err);
-            return;
-          }
-        });
-      }
-    });
+  if (db) {
+    db.collection("countries")
+      .find()
+      .toArray((err, result) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        if (result.length < 1) {
+          db.createCollection("countries");
+          db.createCollection("scores");
+          db.collection("countries").insert(countries, (err, res) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+          });
+        }
+      });
+  }
 
   app.get("/api/countries", function (req, res) {
     db.collection("countries")
