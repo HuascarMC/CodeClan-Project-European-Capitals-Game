@@ -16,6 +16,16 @@ app.use(bodyParser.json());
 
 app.use(express.static("./build"));
 
+function buildPhotoReferenceURL(html_attribution, photo_reference) {
+  const url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo_reference}&key=${process.env.GOOGLE_API_KEY}`;
+  return `<div><ol>
+  <li>
+  <img src="${url}"/>
+  </li>
+  <li></ul>${html_attribution}</li>
+  </ol></div>`;
+}
+
 MongoClient.connect(MONGO_URL, (err, client) => {
   if (err) {
     console.log(err);
@@ -47,16 +57,20 @@ MongoClient.connect(MONGO_URL, (err, client) => {
 
   app
     .get("/api/search/places", (req, res) => {
-      const url =
-        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${req.query.place}&key=` +
-        process.env.GOOGLE_API_KEY;
+      const url = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&locationbias=point:${req.query.lat},${req.query.lng}&fields=photos&input=${req.query.place}&key=${process.env.GOOGLE_API_KEY}`;
       let data = "";
       https.get(url, (response) => {
         response.on("data", (chunk) => {
           data += chunk;
         });
         response.on("end", () => {
-          res.json(JSON.parse(data));
+          let responseData = JSON.parse(data).candidates[0].photos[0];
+          res.json(
+            buildPhotoReferenceURL(
+              responseData.html_attributions[0],
+              responseData.photo_reference
+            )
+          );
         });
       });
     })

@@ -18,6 +18,7 @@ let scores;
 let news;
 let token;
 let crypto;
+let image;
 
 const MAX_QUESTIONS = 5;
 let questionCount = 0;
@@ -81,7 +82,7 @@ const initialize = async function (lat, lng, token) {
         modal.set({
           title: playerScore.getTitle(distance),
           body: `
-          <img src='${country.images[0]}'/>
+          ${image}
           <p><img src=${weatherIcon}> ${currentWeather}</p>
           <p>${distance} km away.</p>
           <p>You scored <span>${playerScore.calculate(distance)}</span></p>
@@ -134,6 +135,7 @@ const loadQuestion = function () {
   const randomCountry = request.getRandomCountry(function (countryInfo) {
     createCard(countryInfo);
     country = countryInfo;
+    getPhotos(country);
   });
 };
 
@@ -217,12 +219,13 @@ const getScores = function () {
   });
 };
 
-const getPhotos = function (city) {
+const getPhotos = function (country) {
+  console.log(country);
   const request = new Request(
-    `http://localhost:5000/api/search/places?place=` + city
+    `http://localhost:5000/api/search/places?place=${country.properties.capital}&lat=${country.geometry.coordinates[0]}&lng=${country.geometry.coordinates[1]}`
   );
   request.get(function (body) {
-    scores = body;
+    image = body;
   });
 };
 
