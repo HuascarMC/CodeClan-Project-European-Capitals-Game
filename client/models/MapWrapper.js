@@ -1,10 +1,15 @@
 const GoogleMapsLoader = require("google-maps");
+const { decrypt } = require("../../crypto");
 
-if (process.env.API_KEY) {
-  GoogleMapsLoader.KEY = process.env.API_KEY;
-}
-
-const MapWrapper = function (container, coordinates, zoom, callback) {
+const MapWrapper = function (
+  container,
+  coordinates,
+  zoom,
+  token,
+  crypto,
+  callback
+) {
+  GoogleMapsLoader.KEY = decrypt(token.api, crypto);
   GoogleMapsLoader.load(
     function (google) {
       this.google = google; //google object.
@@ -76,7 +81,6 @@ MapWrapper.prototype.setCapitalMarker = function (coords) {
       },
     });
   }
-  console.log("Hello");
 };
 
 module.exports = MapWrapper;
