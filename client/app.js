@@ -19,9 +19,26 @@ let news;
 let token;
 let crypto;
 let image;
+let voiceEnabled = true;
 
 const MAX_QUESTIONS = 5;
 let questionCount = 0;
+
+document.addEventListener("DOMContentLoaded", function () {
+  const voiceToggleElement = document.getElementById("voice-toggle");
+  voiceToggleElement.addEventListener("click", function () {
+    voiceEnabled = !voiceEnabled;
+    if (voiceEnabled) {
+      voiceToggleElement.innerHTML = "Disable voice";
+      voiceToggleElement.classList.remove("disabled");
+      voiceToggleElement.classList.add("enabled");
+    } else {
+      voiceToggleElement.innerHTML = "Enable voice";
+      voiceToggleElement.classList.remove("enabled");
+      voiceToggleElement.classList.add("disabled");
+    }
+  });
+});
 
 const app = function () {
   getCrypto(() => {
@@ -118,11 +135,12 @@ const initialize = async function (lat, lng, token) {
           },
         });
         modal.show();
-        console.log(speech.getVoices());
-        const readText = new SpeechSynthesisUtterance(country.history);
-        readText.voice = speech.getVoices()[0];
-        speech.speak(readText);
-      } else {
+        if (voiceEnabled) {
+          console.log(speech.getVoices());
+          const readText = new SpeechSynthesisUtterance(country.history);
+          readText.voice = speech.getVoices()[0];
+          speech.speak(readText);
+        }
       }
     }
   );
@@ -146,7 +164,6 @@ const createCard = function (country) {
     `http://api.openweathermap.org/data/2.5/weather?q=${country.properties.capital}&units=metric&APPID=4d395766733b9a8d94c94baa063152f1`
   );
   request.get(function (body) {
-    console.log(body);
     currentWeather = "Temperature: " + body.main.temp + "°";
     weatherIcon =
       "http://openweathermap.org/img/w/" + body.weather[0].icon + ".png";
@@ -220,7 +237,6 @@ const getScores = function () {
 };
 
 const getPhotos = function (country) {
-  console.log(country);
   const request = new Request(
     `http://localhost:5000/api/search/places?place=${country.properties.capital}&lat=${country.geometry.coordinates[0]}&lng=${country.geometry.coordinates[1]}`
   );

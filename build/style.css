@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'avenir';
+  font-family: "avenir";
 }
 
 body {
@@ -14,6 +14,9 @@ nav {
   margin-top: 5px;
   padding: 5px;
   font-size: 20px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #map {
@@ -23,8 +26,6 @@ nav {
   top: 50px;
   z-index: -10;
 }
-
-
 
 .modal-open {
   margin-top: 2rem;
@@ -79,12 +80,12 @@ nav {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.modal span{
+.modal span {
   font-weight: bold;
   font-size: 20px;
   color: red;
 }
-.modal .background-fact{
+.modal .background-fact {
   line-height: 1.5;
 }
 .modal-buttons {
@@ -119,7 +120,7 @@ nav {
   margin: 0;
 }
 .modal img {
-  margin-top:1rem;
+  margin-top: 1rem;
   max-width: 50%;
   max-height: 200px;
 }
@@ -136,4 +137,44 @@ nav {
 .modal #score-board {
   color: red;
   font-size: 40px;
+}
+
+.title {
+  margin: auto;
+  width: 56%;
+  text-align: center;
+  float: right;
+  margin-right: 19%;
+}
+
+.navbar-list {
+  display: inline;
+}
+
+.navbar-list-element {
+  display: inline;
+}
+
+nav {
+  display: inline;
+}
+
+#voice-toggle {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: -9px 2px;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: #f44336 !important;
+}
+
+.enabled {
+  background-color: #008cba !important;
 }
