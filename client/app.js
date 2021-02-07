@@ -217,6 +217,15 @@ const getScores = function () {
   });
 };
 
+const getPhotos = function (city) {
+  const request = new Request(
+    `http://localhost:5000/api/search/places?place=` + city
+  );
+  request.get(function (body) {
+    scores = body;
+  });
+};
+
 // const getNews = function(country) {
 //  const request = new Request('https://newsapi.org/v2/everything?sources=bbc-news,daily-mail,google-news-uk&page=5&sortBy=relevancy&language=en&' + `q=${country.properties.country}` + '&apiKey=526a0f58261340d58af4d6569c12859e')
 //

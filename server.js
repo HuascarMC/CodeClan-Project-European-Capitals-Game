@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const countries = require("./countries.json");
 const { encrypt } = require("./crypto");
+const https = require("https");
 require("dotenv").config();
 
 const MONGO_URL = process.env.MONGO_DB_URI || "mongodb://localhost:27017/";
@@ -43,6 +44,25 @@ MongoClient.connect(MONGO_URL, (err, client) => {
         }
       });
   }
+
+  app
+    .get("/api/search/places", (req, res) => {
+      const url =
+        `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${req.query.place}&key=` +
+        process.env.GOOGLE_API_KEY;
+      let data = "";
+      https.get(url, (response) => {
+        response.on("data", (chunk) => {
+          data += chunk;
+        });
+        response.on("end", () => {
+          res.json(JSON.parse(data));
+        });
+      });
+    })
+    .on("error", (err) => {
+      console.log("Error: " + err.message);
+    });
 
   app.get("/api/crypto", function (req, res) {
     if (process.env.ALGORITHM && process.env.SECRET_KEY) {
