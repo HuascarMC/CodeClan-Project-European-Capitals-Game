@@ -1,6 +1,5 @@
 {
   "day": [
-    { "elementType": "labels", "stylers": [{ "visibility": "off" }] },
     {
       "featureType": "administrative.land_parcel",
       "stylers": [{ "visibility": "off" }]
@@ -22,6 +21,7 @@
         }
       ]
     },
+
     {
       "featureType": "landscape",
       "elementType": "geometry.fill",
@@ -205,6 +205,23 @@
           "visibility": "off"
         }
       ]
+    },
+    {
+      "featureType": "water",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    },
+    {
+      "featureType": "water",
+      "elementType": "labels.text.fill",
+      "stylers": [
+        {
+          "color": "#7B8758"
+        }
+      ]
     }
   ],
   "night": [
@@ -237,6 +254,15 @@
       "stylers": [
         {
           "color": "#1a3646"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.country",
+      "elementType": "labels",
+      "stylers": [
+        {
+          "visibility": "off"
         }
       ]
     },
