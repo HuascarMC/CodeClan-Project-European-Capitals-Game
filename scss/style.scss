@@ -11,7 +11,17 @@ body {
   justify-content: center;
   overflow: hidden;
   background-color: #2977be;
-  color: white;
+}
+
+#top-title {
+  color: #ffefbf;
+}
+
+.levels {
+  font-size: 19px;
+  font-weight: bold;
+  padding: 10px;
+  float: left;
 }
 
 nav {
@@ -286,6 +296,10 @@ button {
       position: absolute;
       left: -99em;
     }
+  }
+
+  .levels {
+    display: none;
   }
 }
 

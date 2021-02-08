@@ -39,11 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
   voiceToggleElement.addEventListener("click", function () {
     voiceEnabled = !voiceEnabled;
     if (voiceEnabled) {
-      voiceToggleElement.innerHTML = "Disable voice";
       voiceToggleElement.classList.remove("disabled");
       voiceToggleElement.classList.add("enabled");
     } else {
-      voiceToggleElement.innerHTML = "Enable voice";
       voiceToggleElement.classList.remove("enabled");
       voiceToggleElement.classList.add("disabled");
     }
