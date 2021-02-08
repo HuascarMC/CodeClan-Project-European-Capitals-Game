@@ -2,14 +2,13 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "avenir";
+  font: normal normal 16px / normal "Source Sans Pro", Calibri, Arial,
+    Sans-Serif;
 }
 
 body {
   display: flex;
   justify-content: center;
-  font: normal normal 16px / normal "Source Sans Pro", Calibri, Arial,
-    Sans-Serif;
 }
 
 nav {
@@ -22,7 +21,7 @@ nav {
 }
 
 #map {
-  height: 94.6vh;
+  height: 94.3vh;
   width: 100vw;
   position: absolute;
   top: 50px;
@@ -151,6 +150,7 @@ ul {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
+  font-weight: bold;
 }
 
 .navbar-list {
@@ -171,19 +171,6 @@ ul {
   display: inline-flex;
   height: 5vh;
 }
-
-/* #voice-toggle {
-  border: none;
-  color: white;
-  padding: 10px 30px 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: -15px 2px;
-  cursor: pointer;
-  min-width: 151px;
-} */
 
 .disabled {
   background-color: #008cba;
@@ -225,7 +212,7 @@ ul {
   margin-right: 6px;
 }
 
-#voice-toggle,
+button,
 input,
 select,
 textarea {
@@ -257,7 +244,7 @@ textarea {
   transition: all 0.26s ease-out;
 }
 
-#voice-toggle {
+button {
   width: auto;
 
   color: #ffefbf;

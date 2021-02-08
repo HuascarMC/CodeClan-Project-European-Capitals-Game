@@ -20,12 +20,18 @@ let token;
 let crypto;
 let image;
 let voiceEnabled = true;
+let numberOfQuestions = 7;
 
-const MAX_QUESTIONS = 5;
+let numberOfQuestionsInput;
+
 let questionCount = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const voiceToggleElement = document.getElementById("voice-toggle");
+
+  numberOfQuestionsInput = document.getElementById("levels-input");
+  numberOfQuestionsInput.value = numberOfQuestions;
+
   voiceToggleElement.addEventListener("click", function () {
     voiceEnabled = !voiceEnabled;
     if (voiceEnabled) {
@@ -38,6 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
       voiceToggleElement.classList.add("disabled");
     }
   });
+
+  numberOfQuestionsInput.addEventListener("change", function (event) {
+    numberOfQuestions = event.target.value;
+  });
 });
 
 const app = function () {
@@ -47,13 +57,13 @@ const app = function () {
       modal = new Modal({
         title: "Where on Earth? (Europe Edition)",
         body:
-          "<div id='sub-title'><p>The ultimate Country and Capital's game!</p>" +
+          "<div>" +
           "<p> Guess where the capitals are to win big and learn some fun facts. </p></div>" +
-          "<h1> How to play </h1>" +
-          "<p> 1) Enter your name then press the start button below. </p>" +
-          "<p> 2) When the game starts a city name will show, try and find it on the map. </p>" +
-          "<p> 3) Click and place your marker where you think it is. </p>" +
-          "<p> 4) See how close you got and your score. </p>" +
+          "<h1 class='title'> How to play: </h1>" +
+          "<p><span style='font-weight: bold; color: black;'>1.</span> Enter your name then press the start button below. </p>" +
+          "<p> <span style='font-weight: bold; color: black;'>2.</span> When the game starts a city name will show, try and find it on the map. </p>" +
+          "<p> <span style='font-weight: bold; color: black;'>3.</span> Click and place your marker where you think it is. </p>" +
+          "<p> <span style='font-weight: bold; color: black;'>4.</span> See how close you got and your score. </p>" +
           "<form><input id='name' maxlength='50' placeholder='Enter name here'></form>",
         buttons: {
           action: {
@@ -86,7 +96,7 @@ const initialize = async function (lat, lng, token) {
     token,
     crypto,
     function (attempt) {
-      if (questionCount < MAX_QUESTIONS) {
+      if (questionCount < numberOfQuestions) {
         const countryLocation = [
           country.geometry.coordinates[1],
           country.geometry.coordinates[0],
@@ -113,7 +123,7 @@ const initialize = async function (lat, lng, token) {
                 modal.hide();
                 speech.cancel();
                 questionCount++;
-                if (questionCount === MAX_QUESTIONS) {
+                if (questionCount === numberOfQuestions) {
                   gameEnd(playerScore.getTotal());
                   return;
                 }
@@ -159,7 +169,8 @@ const loadQuestion = function () {
 
 const createCard = function (country) {
   const title = document.querySelector(".title");
-  title.innerHTML = "Where is " + country.properties.capital + "?";
+  title.innerHTML =
+    `${questionCount + 1}. Where is ` + country.properties.capital + "?";
   const request = new Request(
     `http://api.openweathermap.org/data/2.5/weather?q=${country.properties.capital}&units=metric&APPID=4d395766733b9a8d94c94baa063152f1`
   );
