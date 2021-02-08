@@ -84,6 +84,7 @@ const app = function () {
 };
 
 const initialize = async function (lat, lng, token) {
+  questionCount = 0;
   let center = { lat, lng };
   let mapDiv = document.getElementById("map");
   questionCount = 0;
@@ -123,7 +124,7 @@ const initialize = async function (lat, lng, token) {
                 modal.hide();
                 speech.cancel();
                 questionCount++;
-                if (questionCount === numberOfQuestions) {
+                if (questionCount == numberOfQuestions) {
                   gameEnd(playerScore.getTotal());
                   return;
                 }
