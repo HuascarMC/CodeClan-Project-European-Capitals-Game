@@ -8,6 +8,8 @@
 body {
   display: flex;
   justify-content: center;
+  font: normal normal 16px / normal "Source Sans Pro", Calibri, Arial,
+    Sans-Serif;
 }
 
 nav {
@@ -20,7 +22,7 @@ nav {
 }
 
 #map {
-  height: 95vh;
+  height: 94.6vh;
   width: 100vw;
   position: absolute;
   top: 50px;
@@ -139,42 +141,144 @@ nav {
   font-size: 40px;
 }
 
+ul {
+  font-size: 0px;
+}
+
 .title {
-  margin: auto;
-  width: 56%;
+  width: 100%;
+  font-size: 19px;
+  display: inline-block;
+  vertical-align: middle;
   text-align: center;
-  float: right;
-  margin-right: 19%;
 }
 
 .navbar-list {
-  display: inline;
+  display: table;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  margin-top: -7px;
+  table-layout: fixed;
 }
 
 .navbar-list-element {
-  display: inline;
+  display: table-cell;
+  vertical-align: middle;
 }
 
-nav {
-  display: inline;
+.nav {
+  display: inline-flex;
+  height: 5vh;
 }
 
-#voice-toggle {
+/* #voice-toggle {
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 30px 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: -9px 2px;
+  margin: -15px 2px;
   cursor: pointer;
-}
+  min-width: 151px;
+} */
 
 .disabled {
-  background-color: #f44336 !important;
+  background-color: #008cba;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #008cba),
+    color-stop(100%, #057ca3)
+  );
+  background-image: -webkit-linear-gradient(top, #008cba 0%, #057ca3 100%);
+  background-image: -moz-linear-gradient(top, #008cba 0%, #057ca3 100%);
+  background-image: -ms-linear-gradient(top, #008cba 0%, #057ca3 100%);
+  background-image: -o-linear-gradient(top, #008cba 0%, #057ca3 100%);
+  background-image: linear-gradient(to bottom, #008cba 0%, #057ca3 100%);
+  border-color: #057ca3 #057ca3 #057ca3;
 }
 
 .enabled {
-  background-color: #008cba !important;
+  background-color: #cc0000;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #cc0000),
+    color-stop(100%, #960a00)
+  );
+  background-image: -webkit-linear-gradient(top, #cc0000 0%, #960a00 100%);
+  background-image: -moz-linear-gradient(top, #cc0000 0%, #960a00 100%);
+  background-image: -ms-linear-gradient(top, #cc0000 0%, #960a00 100%);
+  background-image: -o-linear-gradient(top, #cc0000 0%, #960a00 100%);
+  background-image: linear-gradient(to bottom, #cc0000 0%, #960a00 100%);
+  border-color: #9a0a00 #9a0a00 #7e0a03;
+}
+
+.difficulty {
+  display: inline;
+  float: right;
+  margin-right: 6px;
+}
+
+#voice-toggle,
+input,
+select,
+textarea {
+  display: inline-block;
+  vertical-align: middle;
+  width: 57px;
+  margin: 4px 2px;
+  padding: 8px;
+  color: #666;
+  line-height: normal;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top-color: #999;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  outline-offset: -2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.26s ease-out;
+  -moz-transition: all 0.26s ease-out;
+  -ms-transition: all 0.26s ease-out;
+  -o-transition: all 0.26s ease-out;
+  transition: all 0.26s ease-out;
+}
+
+#voice-toggle {
+  width: auto;
+
+  color: #ffefbf;
+  font-weight: bold;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  border-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 1px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 1px rgba(0, 0, 0, 0.4);
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+  min-width: 115px;
+}
+
+#name {
+  width: 15%;
 }

@@ -54,7 +54,7 @@ const app = function () {
           "<p> 2) When the game starts a city name will show, try and find it on the map. </p>" +
           "<p> 3) Click and place your marker where you think it is. </p>" +
           "<p> 4) See how close you got and your score. </p>" +
-          "<form><input id='name' placeholder='Enter name here'></form>",
+          "<form><input id='name' maxlength='50' placeholder='Enter name here'></form>",
         buttons: {
           action: {
             label: "Start Game",
