@@ -9,7 +9,9 @@ const MapWrapper = function (
   crypto,
   callback
 ) {
-  GoogleMapsLoader.KEY = decrypt(token.api, crypto);
+  if (token && token.api && crypto) {
+    GoogleMapsLoader.KEY = decrypt(token.api, crypto);
+  }
   GoogleMapsLoader.load(
     function (google) {
       this.google = google; //google object.

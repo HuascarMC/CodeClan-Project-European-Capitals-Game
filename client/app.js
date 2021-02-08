@@ -6,6 +6,7 @@ const geojson = require("geojson-tools");
 const speech = window.speechSynthesis;
 const NewsView = require("./views/newsView");
 const ScoreView = require("./views/scoreView");
+const { load } = require("google-maps");
 
 let countryMap;
 let country;
@@ -84,10 +85,8 @@ const app = function () {
 };
 
 const initialize = async function (lat, lng, token) {
-  questionCount = 0;
   let center = { lat, lng };
   let mapDiv = document.getElementById("map");
-  questionCount = 0;
   getScores();
   // const newsView = new NewsView();
   countryMap = new MapWrapper(
@@ -158,20 +157,22 @@ const initialize = async function (lat, lng, token) {
 };
 
 const loadQuestion = function () {
-  let question = "Where is.....";
-
   const request = new Request();
-  const randomCountry = request.getRandomCountry(function (countryInfo) {
-    createCard(countryInfo);
-    country = countryInfo;
-    getPhotos(country);
+  request.getRandomCountry(function (countryInfo) {
+    if (country !== countryInfo) {
+      createCard(countryInfo);
+      country = countryInfo;
+      getPhotos(country);
+      const title = document.querySelector(".title");
+      title.innerHTML =
+        `${questionCount + 1}. Where is ` + country.properties.capital + "?";
+    } else {
+      loadQuestion();
+    }
   });
 };
 
 const createCard = function (country) {
-  const title = document.querySelector(".title");
-  title.innerHTML =
-    `${questionCount + 1}. Where is ` + country.properties.capital + "?";
   const request = new Request(
     `http://api.openweathermap.org/data/2.5/weather?q=${country.properties.capital}&units=metric&APPID=4d395766733b9a8d94c94baa063152f1`
   );
@@ -192,8 +193,9 @@ const gameEnd = function (score) {
         label: "Play Again?",
         fn: function () {
           modal.hide();
-          initialize(48.21, 16.37);
+          loadQuestion();
           playerScore.total = 0;
+          questionCount = 0;
         },
       },
       close: {
@@ -209,8 +211,9 @@ const gameEnd = function (score) {
                 label: "Play Again?",
                 fn: function () {
                   modal.hide();
-                  initialize(48.21, 16.37);
+                  loadQuestion();
                   playerScore.total = 0;
+                  questionCount = 0;
                 },
               },
             },
