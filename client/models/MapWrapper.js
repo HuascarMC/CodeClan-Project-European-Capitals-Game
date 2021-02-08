@@ -1,6 +1,9 @@
 const GoogleMapsLoader = require("google-maps");
 const { decrypt } = require("../../crypto");
+const mapStyles = require("./map-styles.json");
 
+let key;
+let googleMap;
 const MapWrapper = function (
   container,
   coordinates,
@@ -10,6 +13,7 @@ const MapWrapper = function (
   callback
 ) {
   if (token && token.api && crypto) {
+    key = token.api;
     GoogleMapsLoader.KEY = decrypt(token.api, crypto);
   }
   GoogleMapsLoader.load(
@@ -18,21 +22,11 @@ const MapWrapper = function (
       this.googleMap = new google.maps.Map(container, {
         center: coordinates,
         zoom: zoom,
-        styles: [
-          { elementType: "labels", stylers: [{ visibility: "off" }] },
-          {
-            featureType: "administrative.land_parcel",
-            stylers: [{ visibility: "off" }],
-          },
-          {
-            featureType: "administrative.neighborhood",
-            stylers: [{ visibility: "off" }],
-          },
-          { featureType: "road", stylers: [{ visibility: "off" }] },
-        ],
+        styles: mapStyles.day,
       });
       this.marker = null;
       this.correctMarker = null;
+      googleMap = this.googleMap;
 
       google.maps.event.addListener(
         this.googleMap,
@@ -83,6 +77,18 @@ MapWrapper.prototype.setCapitalMarker = function (coords) {
       },
     });
   }
+};
+
+MapWrapper.prototype.setNightMode = function () {
+  googleMap.setOptions({
+    styles: mapStyles.night,
+  });
+};
+
+MapWrapper.prototype.setDayMode = function () {
+  googleMap.setOptions({
+    styles: mapStyles.day,
+  });
 };
 
 module.exports = MapWrapper;

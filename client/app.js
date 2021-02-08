@@ -21,6 +21,7 @@ let token;
 let crypto;
 let image;
 let voiceEnabled = true;
+let nightModeEnabled = false;
 let numberOfQuestions = 7;
 
 let numberOfQuestionsInput;
@@ -28,10 +29,12 @@ let numberOfQuestionsInput;
 let questionCount = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
-  const voiceToggleElement = document.getElementById("voice-toggle");
+  const voiceToggleElement = document.getElementById("voice-toggler");
 
   numberOfQuestionsInput = document.getElementById("levels-input");
   numberOfQuestionsInput.value = numberOfQuestions;
+
+  const nightModeToggler = document.getElementById("night-mode-toggler");
 
   voiceToggleElement.addEventListener("click", function () {
     voiceEnabled = !voiceEnabled;
@@ -48,6 +51,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   numberOfQuestionsInput.addEventListener("change", function (event) {
     numberOfQuestions = event.target.value;
+  });
+
+  nightModeToggler.addEventListener("change", function (e) {
+    nightModeEnabled = !nightModeEnabled;
+
+    if (!nightModeEnabled) {
+      countryMap.setDayMode();
+    } else {
+      countryMap.setNightMode();
+    }
   });
 });
 
@@ -157,6 +170,7 @@ const initialize = async function (lat, lng, token) {
 };
 
 const loadQuestion = function () {
+  // countryMap.setNightMode();
   const request = new Request();
   request.getRandomCountry(function (countryInfo) {
     if (country !== countryInfo) {

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec node -- server.js",
-    "build": "webpack -w"
+    "build": "webpack -w",
+    "scss": "node-sass --watch scss -o build"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "forecast": "^0.3.2",
     "geojson-tools": "^0.2.2",
     "google-maps": "^3.2.1",
-    "mongodb": "^3.6.4"
+    "mongodb": "^3.6.4",
+    "node-sass": "^5.0.0"
   }
 }
