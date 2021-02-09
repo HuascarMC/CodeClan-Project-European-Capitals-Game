@@ -1,11 +1,14 @@
-'use strict';
-const path = require('path');
+"use strict";
+const path = require("path");
 
 module.exports = {
-  entry: './client/app.js',
+  entry: "./client/app.js",
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "build"),
+    filename: "bundle.js",
   },
-  devtool: 'source-map',
+  devtool: "source-map",
+  node: {
+    fs: "empty",
+  },
 };

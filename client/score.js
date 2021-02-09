@@ -1,12 +1,14 @@
-const Request = require('./services/request.js');
+const Request = require("./services/request.js");
 // const scoreView = require('./scoreView.js');
 
-const Score = function(name) {
+const url = window.location;
+
+const Score = function (name) {
   this.total = 0;
   this.name = name;
 };
 
-Score.prototype.calculate = function(distance) {
+Score.prototype.calculate = function (distance) {
   switch (true) {
     case distance <= 50:
       this.increase(1000);
@@ -22,30 +24,30 @@ Score.prototype.calculate = function(distance) {
   }
 };
 
-Score.prototype.getTitle = function(distance) {
+Score.prototype.getTitle = function (distance) {
   switch (true) {
     case distance <= 50:
-      return 'Spot on!';
+      return "Spot on!";
     case distance > 50 && distance <= 300:
-      return 'Close but no cigar.';
+      return "Close but no cigar.";
     case distance > 300 && distance <= 1000:
-      return 'Almost';
+      return "Almost";
     case distance > 1000:
-      return 'Unlucky!';
+      return "Unlucky!";
   }
 };
 
-Score.prototype.increase = function(score) {
+Score.prototype.increase = function (score) {
   this.total += score;
 };
 
-Score.prototype.getTotal = function() {
+Score.prototype.getTotal = function () {
   return this.total;
 };
 
-Score.prototype.saveScore = function() {
-  const request = new Request('http://localhost:5000/api/scores');
-  request.post({score: this.total, name: this.name});
+Score.prototype.saveScore = function () {
+  const request = new Request(url.protocol + "//" + url.host + "/api/scores");
+  request.post({ score: this.total, name: this.name });
 };
 
 module.exports = Score;
