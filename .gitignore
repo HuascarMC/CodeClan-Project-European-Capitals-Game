@@ -3,3 +3,5 @@
 /build/bundle.js.map
 .vscode
 .env
+package-lock.json
+yarn.lock
