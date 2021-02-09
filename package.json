@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon --exec node -- server.js",
     "build": "webpack -w",
+    "heroku-postbuild": "",
     "scss": "node-sass --watch scss -o build"
   },
   "repository": {
@@ -21,7 +22,7 @@
   "homepage": "https://github.com/cmarshall10450/CodeClan-Project-European-Capitals-Game#readme",
   "devDependencies": {
     "nodemon": "^1.14.7",
-    "webpack": "^3.10.0"
+    "webpack": "^3.12.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
