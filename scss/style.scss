@@ -14,6 +14,7 @@ body {
 }
 
 #top-title {
+  padding: 10px;
   color: #ffefbf;
 }
 
@@ -160,8 +161,6 @@ ul {
 .title {
   width: 100%;
   font-size: 19px;
-  display: inline-block;
-  vertical-align: middle;
   text-align: center;
   font-weight: bold;
 }
@@ -282,8 +281,18 @@ button {
   width: 15%;
 }
 
+.logo-container {
+  display: inline;
+}
+
+.logo {
+  width: 34px;
+  float: left;
+  display: inline-block;
+}
+
 /* Night mode toggler */
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 760px) {
   /* put your css styles in here */
   .toggleWrapper {
     position: absolute !important;
@@ -299,6 +308,10 @@ button {
   }
 
   .levels {
+    display: none;
+  }
+
+  .logo {
     display: none;
   }
 }

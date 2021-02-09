@@ -20,12 +20,12 @@ let news;
 let token;
 let crypto;
 let image;
+
+let url = window.location;
 let voiceEnabled = true;
 let nightModeEnabled = false;
 let numberOfQuestions = 7;
-
 let numberOfQuestionsInput;
-
 let questionCount = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -241,7 +241,7 @@ const gameEnd = function (score) {
 };
 
 const getCrypto = function (callback) {
-  const request = new Request("http://localhost:5000/api/crypto");
+  const request = new Request(url.protocol + "//" + url.host + "/api/crypto");
   request.get((body) => {
     crypto = body;
     callback();
@@ -249,7 +249,7 @@ const getCrypto = function (callback) {
 };
 
 const getToken = function (callback) {
-  const request = new Request("http://localhost:5000/api/google");
+  const request = new Request(url.protocol + "//" + url.host + "/api/google");
   request.get((body) => {
     token = body;
     callback();
@@ -257,7 +257,7 @@ const getToken = function (callback) {
 };
 
 const getScores = function () {
-  const request = new Request("http://localhost:5000/api/scores");
+  const request = new Request(url.protocol + "//" + url.host + "/api/scores");
   request.get(function (body) {
     scores = body;
   });
@@ -265,7 +265,10 @@ const getScores = function () {
 
 const getPhotos = function (country) {
   const request = new Request(
-    `http://localhost:5000/api/search/places?place=${country.properties.capital}&lat=${country.geometry.coordinates[0]}&lng=${country.geometry.coordinates[1]}`
+    url.protocol +
+      "//" +
+      url.host +
+      `/api/search/places?place=${country.properties.capital}&lat=${country.geometry.coordinates[0]}&lng=${country.geometry.coordinates[1]}`
   );
   request.get(function (body) {
     image = body;

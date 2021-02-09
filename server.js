@@ -64,13 +64,19 @@ MongoClient.connect(MONGO_URL, (err, client) => {
           data += chunk;
         });
         response.on("end", () => {
-          let responseData = JSON.parse(data).candidates[0].photos[0];
-          res.json(
-            buildPhotoReferenceURL(
-              responseData.html_attributions[0],
-              responseData.photo_reference
-            )
-          );
+          if (
+            data &&
+            JSON.parse(data).candidates &&
+            JSON.parse(data).candidates.length > 0
+          ) {
+            let responseData = JSON.parse(data).candidates[0].photos[0];
+            res.json(
+              buildPhotoReferenceURL(
+                responseData.html_attributions[0],
+                responseData.photo_reference
+              )
+            );
+          }
         });
       });
     })
