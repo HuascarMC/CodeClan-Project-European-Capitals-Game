@@ -14,7 +14,7 @@ const MapWrapper = function (
 ) {
   if (token && token.api && crypto) {
     key = token.api;
-    GoogleMapsLoader.KEY = decrypt(token.api, crypto);
+    GoogleMapsLoader.KEY = JSON.parse(decrypt(token.api, crypto)).gkey;
   }
   GoogleMapsLoader.load(
     function (google) {

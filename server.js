@@ -87,7 +87,10 @@ MongoClient.connect(MONGO_URL, (err, client) => {
   app.get("/api/crypto", function (req, res) {
     if (process.env.ALGORITHM && process.env.SECRET_KEY) {
       res.json({
-        crypto: { algo: process.env.ALGORITHM, skey: process.env.SECRET_KEY },
+        crypto: {
+          algo: process.env.ALGORITHM,
+          skey: process.env.SECRET_KEY,
+        },
       });
     } else {
       res.json("Not available.");
@@ -96,7 +99,14 @@ MongoClient.connect(MONGO_URL, (err, client) => {
 
   app.get("/api/google", function (req, res) {
     if (process.env.GOOGLE_API_KEY) {
-      res.json({ api: encrypt(process.env.GOOGLE_API_KEY) });
+      res.json({
+        api: encrypt(
+          JSON.stringify({
+            gkey: process.env.GOOGLE_API_KEY,
+            wkey: process.env.OPEN_WEATHER_API_KEY,
+          })
+        ),
+      });
     } else {
       res.json("Not available.");
     }

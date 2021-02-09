@@ -7,6 +7,7 @@ const speech = window.speechSynthesis;
 const NewsView = require("./views/newsView");
 const ScoreView = require("./views/scoreView");
 const { load } = require("google-maps");
+const { decrypt } = require("../crypto");
 
 let countryMap;
 let country;
@@ -186,7 +187,9 @@ const loadQuestion = function () {
 
 const createCard = function (country) {
   const request = new Request(
-    `http://api.openweathermap.org/data/2.5/weather?q=${country.properties.capital}&units=metric&APPID=4d395766733b9a8d94c94baa063152f1`
+    `http://api.openweathermap.org/data/2.5/weather?q=${
+      country.properties.capital
+    }&units=metric&APPID=${JSON.parse(decrypt(token.api, crypto)).wkey}`
   );
   request.get(function (body) {
     currentWeather = "Temperature: " + body.main.temp + "°";
