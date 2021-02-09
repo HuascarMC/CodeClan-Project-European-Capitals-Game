@@ -91,4 +91,4 @@ MapWrapper.prototype.setDayMode = function () {
   });
 };
 
-module.exports = MapWrapper;
+module.exports = mapWrapper;
