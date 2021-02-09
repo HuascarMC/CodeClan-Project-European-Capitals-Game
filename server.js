@@ -8,7 +8,7 @@ const https = require("https");
 require("dotenv").config();
 
 const MONGO_URL = process.env.MONGO_DB_URI || "mongodb://localhost:27017/";
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors("*"));
 app.use(bodyParser.urlencoded({ extended: true }));
