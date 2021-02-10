@@ -1,5 +1,5 @@
-const MapWrapper = require("./models/mapWrapper");
-const Modal = require("./models/modal");
+const MapWrapper = require("./models/MapWrapper");
+const Modal = require("./Modal");
 const Score = require("./score");
 const Request = require("./services/request");
 const geojson = require("geojson-tools");
@@ -187,7 +187,7 @@ const loadQuestion = function () {
 
 const createCard = function (country) {
   const request = new Request(
-    `http://api.openweathermap.org/data/2.5/weather?q=${
+    `https://api.openweathermap.org/data/2.5/weather?q=${
       country.properties.capital
     }&units=metric&APPID=${JSON.parse(decrypt(token.api, crypto)).wkey}`
   );

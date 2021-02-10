@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "start:dev": "nodemon --exec node -- server.js",
-    "build": "webpack -w",
-    "heroku-postbuild": "",
-    "scss": "node-sass --watch scss -o build"
+    "scss": "node-sass --watch scss -o build",
+    "build:dev": "webpack -w"
   },
   "repository": {
     "type": "git",
