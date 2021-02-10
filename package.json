@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "start:dev": "nodemon --exec node -- server.js",
-    "build": "webpack -w",
     "scss": "node-sass --watch scss -o build",
-    "postinstall": "npm run build"
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
