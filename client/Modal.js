@@ -2,6 +2,7 @@ const Modal = function (options) {
   this.options = options;
   this.visible = false;
 };
+
 Modal.prototype.build = function (data) {
   const modalWrapper = document.createElement("div");
   // let html = '';

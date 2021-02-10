@@ -1,5 +1,5 @@
 const MapWrapper = require("./models/MapWrapper");
-const Modal = require("./models/Modal");
+const Modal = require("./Modal");
 const Score = require("./score");
 const Request = require("./services/request");
 const geojson = require("geojson-tools");
