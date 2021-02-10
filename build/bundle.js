@@ -37799,12 +37799,14 @@ MapWrapper.prototype.setNightMode = function () {
   googleMap.setOptions({
     styles: mapStyles.night,
   });
+  document.getElementById("gh-logo").src = "GitHub-Mark-120px-plus.png";
 };
 
 MapWrapper.prototype.setDayMode = function () {
   googleMap.setOptions({
     styles: mapStyles.day,
   });
+  document.getElementById("gh-logo").src = "GitHub-Mark-Light-120px-plus.png";
 };
 
 module.exports = MapWrapper;
