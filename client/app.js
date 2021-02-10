@@ -187,7 +187,7 @@ const loadQuestion = function () {
 
 const createCard = function (country) {
   const request = new Request(
-    `http://api.openweathermap.org/data/2.5/weather?q=${
+    `https://api.openweathermap.org/data/2.5/weather?q=${
       country.properties.capital
     }&units=metric&APPID=${JSON.parse(decrypt(token.api, crypto)).wkey}`
   );
