@@ -1,7 +1,7 @@
 # European Capitals Game
 
 Play the game [here](https://european-capitals.herokuapp.com/), allow a few seconds
-to wake up the server if it's been idling for a while.
+to wake up the server in case it's been idling for a while.
 
 ## Purpose
 
