@@ -309,8 +309,6 @@ button {
   display: inline-block;
 }
 
-<<<<<<< Updated upstream
-=======
 .tooltip {
   background: #333;
   color: white;
@@ -334,7 +332,6 @@ button {
   background: #333;
 }
 
->>>>>>> Stashed changes
 #gh-logo {
   display: inline;
   width: 37px;
@@ -342,8 +339,6 @@ button {
   margin: 3px 4px 0px 4px;
 }
 
-<<<<<<< Updated upstream
-=======
 .tooltip[data-popper-placement^="top"] > #arrow {
   bottom: -4px;
 }
@@ -360,7 +355,6 @@ button {
   left: -4px;
 }
 
->>>>>>> Stashed changes
 /* Night mode toggler */
 @media only screen and (max-width: 700px) {
   /* put your css styles in here */
@@ -368,13 +362,6 @@ button {
     position: absolute !important;
     overflow: hidden;
     /* float: right; */
-<<<<<<< Updated upstream
-    top: 92%;
-    right: 74%; }
-    .toggleWrapper input {
-      position: absolute;
-      left: -99em; }
-=======
     bottom: 30px;
     left: 2px;
   }
@@ -390,7 +377,6 @@ button {
   #map {
     height: 93.2vh;
   }
->>>>>>> Stashed changes
   .levels {
     display: none;
   }
